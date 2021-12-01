@@ -23,15 +23,15 @@ public class TestController {
 	
 	@GetMapping(path="/consultaTemp")
 	public String consultaTemp() {
-		logger.info("Llamada a consulta.");
 		counterConsulta.increment();
+		logger.info("Se ha llamado a consulta "+counterConsulta.count()+" veces");
 		return "La temperatura en Farenheit es:"+convierteTemp(20);
 	}
 	
 	@GetMapping(path="/convierteTemp/{tempC}")
 	public int convierteTemp(@PathVariable int tempC) {
-		logger.info("Llamada a convierte.");
 		counterConversion.increment();
+		logger.info("Se ha llamado a convierte "+counterConversion.count()+" veces");
 		return (tempC*9/5)+32;
 	}
 
