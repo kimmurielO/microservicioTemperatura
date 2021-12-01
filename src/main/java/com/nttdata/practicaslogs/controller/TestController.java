@@ -25,11 +25,16 @@ public class TestController {
 		this.counterConversion = Counter.builder("Invocaciones.contadorConversionTemp").description("Invocaciones totales").register(registry);
 	}
 	
-	@GetMapping(path="/consultaTemp")
-	public String consultaTemp() {
+	@GetMapping(path="/consultaTemp/{tempC}")
+	public String consultaTemp(@PathVariable int tempC) {
 		counterConsulta.increment();
 		logger.info("Se ha llamado a consulta "+counterConsulta.count()+" veces");
-		return "La temperatura en Farenheit es:"+convierteTemp(20);
+		
+		if(gradoTest.equals("Celsius")) {
+			return "La temperatura "+ tempC +" en fahrenheit es "+convierteTemp(tempC);
+		} else {
+			return "La temperatura "+tempC+ " en celsius es "+convierteTemp(tempC);
+		}
 	}
 	
 	@GetMapping(path="/convierteTemp/{tempC}")
