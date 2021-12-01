@@ -23,20 +23,16 @@ public class TestController {
 		this.counterConversion = Counter.builder("Invocaciones.contadorConversionTemp").description("Invocaciones totales").register(registry);
 	}
 	
-	@GetMapping("/")
-	public ResponseEntity<String> index(){
-		logger.info("Llamada al endpoint inicial.");
-		return new ResponseEntity<String>(HttpStatus.OK).ok("Hola");
-	}
-	
 	@GetMapping(path="/consultaTemp")
 	public String consultaTemp() {
+		logger.info("Llamada a consulta.");
 		counterConsulta.increment();
 		return "La temperatura en Farenheit es:"+convierteTemp(20);
 	}
 	
 	@GetMapping(path="/convierteTemp/{tempC}")
 	public int convierteTemp(@PathVariable int tempC) {
+		logger.info("Llamada a convierte.");
 		counterConversion.increment();
 		return (tempC*9/5)+32;
 	}
